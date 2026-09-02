@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姜良成 · 个人主页</title>
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ---------- 全局样式 ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 880px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ---------- 头部 ---------- */
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 2rem;
+        }
+
+        /* 头像样式：圆形，固定大小，裁剪居中 */
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;          /* 保证图片填满且不拉伸 */
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+            border: 2px solid white;    /* 可选，增加精致感 */
+        }
+
+        .profile-info h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .profile-info .sub {
+            font-size: 1.1rem;
+            color: #3b82f6;
+            font-weight: 500;
+            margin-top: 0.2rem;
+        }
+
+        .profile-info .bio {
+            margin-top: 0.5rem;
+            color: #475569;
+            font-size: 1rem;
+            max-width: 550px;
+        }
+
+        /* ---------- 联系方式（卡片式按钮） ---------- */
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin: 1.5rem 0 2.5rem 0;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .contact-links a i {
+            font-size: 1.2rem;
+            width: 1.4rem;
+            text-align: center;
+        }
+
+        .contact-links a:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
+        }
+
+        /* 微信小标签 */
+        .wechat-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            background: #f1f5f9;
+            color: #1e293b;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .wechat-label i {
+            font-size: 1.2rem;
+            color: #07c160;
+        }
+
+        /* ---------- 个人简介区 ---------- */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-title i {
+            color: #3b82f6;
+        }
+
+        .about-text {
+            background: #f8fafc;
+            padding: 1.5rem 1.8rem;
+            border-radius: 1.2rem;
+            border-left: 4px solid #3b82f6;
+            color: #334155;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .about-text p {
+            margin: 0;
+        }
+
+        .about-text strong {
+            color: #0f172a;
+        }
+
+        /* ---------- 项目卡片 ---------- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-card {
+            background: #f8fafc;
+            padding: 1.5rem 1.2rem;
+            border-radius: 1.2rem;
+            border: 1px solid #e9edf2;
+            transition: all 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            background: #e2e8f0;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        /* ---------- 页脚 ---------- */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 2px solid #f1f5f9;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* ---------- 手机适配 ---------- */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .profile {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .profile-info .bio {
+                max-width: 100%;
+            }
+            .contact-links {
+                justify-content: center;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ===== 头部（头像已替换为图片） ===== -->
+        <div class="profile">
+            <!-- 将原来文字 '姜' 改为 img 标签，引用 123.jpg -->
+            <img src="123.jpg"  class="avatar">
+            <div class="profile-info">
+                <h1>姜良成</h1>
+                <div class="sub">🎓 曲阜师范大学 · 本科</div>
+                <div class="bio">
+                    ✨ 勤奋刻苦，热爱技术与创造。<br>
+                    🏸 喜欢打羽毛球，🎮 也是 CSGO 的忠实玩家。
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 联系方式 ===== -->
+        <div class="contact-links">
+            <a href="tel:17568260956"><i class="fas fa-phone-alt"></i> 17568260956</a>
+            <a href="mailto:3444756259@qq.com"><i class="fas fa-envelope"></i> 3444756259@qq.com</a>
+            <a href="https://qm.qq.com/cgi-bin/qm/qr?k=你的QQ生成链接" target="_blank"><i class="fab fa-qq"></i> QQ 3444756259</a>
+            <span class="wechat-label"><i class="fab fa-weixin"></i> 微信 s2912947193</span>
+        </div>
+
+        <!-- ===== 个人简介（详细版） ===== -->
+        <div class="section-title">
+            <i class="fas fa-user-graduate"></i> 个人简介
+        </div>
+        <div class="about-text">
+            <p><strong>🎓 教育背景：</strong> 曲阜师范大学 · 本科</p>
+            <p><strong>🏸 兴趣爱好：</strong> 打羽毛球 · 射击游戏 CSGO</p>
+            <p><strong>📍 家庭住址：</strong> 山东省临沂市沂南县</p>
+            <p><strong>📌 个人特质：</strong> 勤奋刻苦，乐于钻研，对前端开发充满热情</p>
+        </div>
+
+        <!-- ===== 我的项目（示例，可替换） ===== -->
+        <div class="section-title">
+            <i class="fas fa-code"></i> 我的项目
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>个人名片页</h3>
+                <p>用 HTML + CSS 打造的个人展示主页。</p>
+                <span class="project-tag"># 前端</span>
+            </div>
+            <div class="project-card">
+                <h3>待更新项目二</h3>
+                <p>你可以把这里换成自己的作品。</p>
+                <span class="project-tag"># 待补充</span>
+            </div>
+            <div class="project-card">
+                <h3>待更新项目三</h3>
+                <p>学无止境，持续产出中……</p>
+                <span class="project-tag"># 进行中</span>
+            </div>
+        </div>
+
+        <!-- ===== 页脚 ===== -->
+        <div class="footer">
+            <p>© 2026 姜良成 · 用 ❤️ 和 GitHub Pages 搭建 · 来自沂南</p>
+        </div>
+
+    </div>
+</body>
+</html>
